@@ -4,63 +4,71 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-class TestData():
+class Data():
     def __init__(self):
         self.firstname = "Test"
         self.lastname = "Tester"
-        self.email = ''
-        self.pwd = ''
+        self.email = '12354@123123123.com'
+        self.pwd = '123123'
         self.url = 'http://live.techpanda.org/'
         self.message = 'share to you'
         
 
 def verify_create_account(driver, firstname, lastname, email, pwd):
-    driver.find_element(By.XPATH, "//div[@class='footer-container']//a[@title='My Account']").click()
+    with allure.step('Step 2: click on my account link'):
+        driver.find_element(By.XPATH, "//div[@class='footer-container']//a[@title='My Account']").click()
     
-    driver.find_element(By.XPATH, "//a[@title='Create an Account']").click()
+    with allure.step('Step 3: click create account link and fill new user information'):
+        driver.find_element(By.XPATH, "//a[@title='Create an Account']").click()
+        driver.find_element(By.XPATH, "//input[@id='firstname']").send_keys(firstname)
+        driver.find_element(By.XPATH, "//input[@id='lastname']").send_keys(lastname)        
+        driver.find_element(By.XPATH, "//input[@id='email_address']").send_keys(email)
+        driver.find_element(By.XPATH, "//input[@id='password']").send_keys(pwd)        
+        driver.find_element(By.XPATH, "//input[@id='confirmation']").send_keys(pwd)
     
-    driver.find_element(By.XPATH, "//input[@id='firstname']").send_keys(firstname)
+    with allure.step('Step 4: click register button'):
+        driver.find_element(By.XPATH, "//button[@title='Register']").click()
     
-    driver.find_element(By.XPATH, "//input[@id='lastname']").send_keys(lastname)
-    
-    driver.find_element(By.XPATH, "//input[@id='email_address']").send_keys(email)
-
-    driver.find_element(By.XPATH, "//input[@id='password']").send_keys(pwd)
-    
-    driver.find_element(By.XPATH, "//input[@id='confirmation']").send_keys(pwd)
-    
-    driver.find_element(By.XPATH, "//button[@title='Register']").click()
-    
-    actual_msg = driver.find_element(By.XPATH, "//li[@class='success-msg']//span").text
-    expect_msg = 'Thank you for registering with Main Website Store.'
-    assert actual_msg in expect_msg
+    with allure.step('Step 5: verify registration is done'):
+        actual_msg = driver.find_element(By.XPATH, "//li[@class='success-msg']//span").text
+        expect_msg = 'Thank you for registering with Main Website Store.'
+        allure.attach(driver.get_screenshot_as_png(),name='registration',attachment_type=allure.attachment_type.PNG)
+        assert actual_msg in expect_msg
 
 def verify_share_wishlist(driver,email,message):
-    driver.find_element(By.XPATH, '//li[@class="level0 nav-1 first"]').click()
+    with allure.step('Step 6: go to TV menu'):
+        driver.find_element(By.XPATH, '//li[@class="level0 nav-2 last"]').click()
+        time.sleep(1)
+        
+    with allure.step('Step 7: add LG LCD in wish list'):
+        driver.find_element(By.XPATH, "//h2/a[@title='LG LCD']//ancestor::h2//following-sibling::div[@class='actions']//a[@class='link-wishlist']").click()
+        time.sleep(1)
+    
+    with allure.step('Step 8: click share wishlist'):
+        driver.find_element(By.XPATH, "//button[@title='Share Wishlist']").click()
+        
+    with allure.step('Step 9: enter email and a message and click share wishlist'):
+        driver.find_element(By.XPATH, "//textarea[@id='email_address']").send_keys(email)    
+        driver.find_element(By.XPATH, "//textarea[@id='message']").send_keys(message)        
+        driver.find_element(By.XPATH, "//button[@title='Share Wishlist']").click()
+        
+    with allure.step('Step 10: verify wishlist is shared'):
+        actual_msg = driver.find_element(By.XPATH, "//li[@class='success-msg']//span").text
+        expect_msg = "Your Wishlist has been shared."
+        allure.attach(driver.get_screenshot_as_png(),name='share wishlist',attachment_type=allure.attachment_type.PNG)
 
-    driver.find_element(By.XPATH, "//h2/a[@title='LG LCD']//ancestor::h2//following-sibling::div[@class='actions']//a[@class='link-wishlist']").click()
-    
-    driver.find_element(By.XPATH, "//button[@title='Share Wishlist']").click()
-    
-    driver.find_element(By.XPATH, "//textarea[@id='email_address']").send_keys(email)
-    
-    driver.find_element(By.XPATH, "//textarea[@id='message']").send_keys(message)
-    
-    driver.find_element(By.XPATH, "//button[@title='Share Wishlist']").click()
-    
-    actual_msg = driver.find_element(By.XPATH, "//li[@class='success-msg']//span").text
-    expect_msg = "Your Wishlist has been shared."
-    assert actual_msg in expect_msg
+        assert actual_msg in expect_msg
     
 def test_day5():
-    testdata = TestData()
+    testdata = Data()
     driver = webdriver.Chrome()
-    driver.get(testdata.url)
-    driver.maximize_window()
-    driver.implicitly_wait(3)
+    with allure.step("Step 1: go to page"):
+        driver.get(testdata.url)
+        driver.maximize_window()
+        driver.implicitly_wait(3)
     verify_create_account(driver, testdata.firstname, testdata.lastname, testdata.email, testdata.pwd)
     verify_share_wishlist(driver, testdata.email, testdata.message)
     
 if __name__ == '__main__':
-    test_day5()
+    pytest.main(['test_Day5.py'])
     
