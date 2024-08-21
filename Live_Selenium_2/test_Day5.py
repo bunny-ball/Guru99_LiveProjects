@@ -8,8 +8,8 @@ class TestData():
     def __init__(self):
         self.firstname = "Test"
         self.lastname = "Tester"
-        self.email = 'test123@123123123.com'
-        self.pwd = 'Abcd@1234'
+        self.email = ''
+        self.pwd = ''
         self.url = 'http://live.techpanda.org/'
         self.message = 'share to you'
         
