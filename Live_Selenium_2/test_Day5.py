@@ -1,14 +1,38 @@
+'''Account Creation
+Verify you can create account in E-commerce site and can share wishlist to other people using email.
+
+Test Steps:
+1. Go to http://live.techpanda.org/ 
+2. Click on my account link
+3. Click Create Account link and fill New User information except Email ID 
+4. Click Register 
+5. Verify Registration is done  --> Account Registration done
+6. Go to TV menu 
+7. Add product in your wish list 
+8. Click SHARE WISHLIST 
+9. In next page enter Email and a message and click SHARE WISHLIST 
+10. Check wishlist is shared  -->  Wishlist Shared Successfully 
+
+Test Data: 
+product = LG LCD 
+First Name = Test
+Last Name = Tester
+email = 
+pwd = 
+share_message = 
+'''
+
 import pytest
 import allure
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-class Data():
+class Data:
     def __init__(self):
         self.firstname = "Test"
         self.lastname = "Tester"
-        self.email = '12354@123123123.com'
+        self.email = '12358@123123123.com'
         self.pwd = '123123'
         self.url = 'http://live.techpanda.org/'
         self.message = 'share to you'
@@ -63,11 +87,13 @@ def test_day5():
     testdata = Data()
     driver = webdriver.Chrome()
     with allure.step("Step 1: go to page"):
+        
         driver.get(testdata.url)
         driver.maximize_window()
         driver.implicitly_wait(3)
     verify_create_account(driver, testdata.firstname, testdata.lastname, testdata.email, testdata.pwd)
     verify_share_wishlist(driver, testdata.email, testdata.message)
+    driver.quit()
     
 if __name__ == '__main__':
     pytest.main(['test_Day5.py'])

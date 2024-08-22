@@ -1,3 +1,18 @@
+'''Error Verification
+Verify that you cannot add more product in cart than the product available in store 
+
+Test Steps:
+1. Goto http://live.techpanda.org/ 
+2. Click on 'MOBILE' menu 
+3. In the list of all mobile , click on 'ADD TO CART' for Sony Xperia mobile 
+4. Change 'QTY' value to 1000 and click 'UPDATE' button. 
+*** the error message in step is different between guru99 and the actural website. ***
+5. Verify the error message.  -->   On clicking update button an error is shown 'The requested quantity for 
+                                    "Sony Xperia" is not available.'
+6. Then click on 'EMPTY CART' link in the footer of list of all mobiles. 
+7. Verify cart is empty. --> On clicking empty cart button - a message 'SHOPPING CART IS EMPTY' is shown 
+'''
+
 import allure
 import pytest
 from selenium import webdriver
@@ -40,6 +55,6 @@ def test_day3():
         expect_emptymsg = 'SHOPPING CART IS EMPTY'
         allure.attach(driver.get_screenshot_as_png(), name = 'empty cart', attachment_type=allure.attachment_type.PNG)
         assert actual_emptymsg in expect_emptymsg
-        
+    driver.quit()
 if __name__ == '__main__':
     test_day3()

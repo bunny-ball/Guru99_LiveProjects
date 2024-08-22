@@ -1,8 +1,18 @@
+'''
+Verify item in Mobile List page can be sorted by 'Name'.
+
+Test Steps:
+1. Goto http://live.techcianda.org/
+2. Verify Title of the page --> Text 'THIS IS DEMO SITE' shown in home page.
+3. Click on 'MOBILE' menu 
+4. Verify Title of the page. --> Title 'MOBILE' is shown on mobile list page. 
+5. In the list of all mobile , select 'SORT BY' dropdown as 'name'. 
+6. Verify all products are sorted by name. --> All 3 products sorted by name 
+'''
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-
-
 import pytest
 import time
 import allure
@@ -47,5 +57,6 @@ def test_day1():
         assert sorted(item_name) == item_name
         #take screenshot and attach to allure report
         allure.attach(driver.get_screenshot_as_png(),name = 'mobiles are sorted', attachment_type=allure.attachment_type.PNG)
-        
+    
+    driver.quit()
     

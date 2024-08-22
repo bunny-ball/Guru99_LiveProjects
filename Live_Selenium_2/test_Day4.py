@@ -1,4 +1,20 @@
-'''handling popup windows'''
+'''Handling Popup Windows
+Verify that you are able to compare two product
+
+Test Steps:
+1. Go to http://live.techpanda.org/ 
+2. Click on 'MOBILE' menu 
+3. In mobile products list , click on 'Add To Compare' for 2 mobiles  
+4. Click on 'COMPARE' button. 
+5. Verify the pop-up window and check that the products are reflected in it. 
+--> A Popup window opens with heading as 'COMPARE PRODUCTS' and the selected products are present in it.
+    compare two product 
+6. Close the Popup Windows. --> Popup window is closed 
+
+Test Data:
+Phone 1 - Sony Xperia
+Phone 2 - IPhone
+'''
 
 import allure
 import pytest
@@ -15,7 +31,7 @@ def test_day4():
     driver.maximize_window()
     
     
-    with allure.step("Step 1: goto live.techpanda.org"):
+    with allure.step("Step 1: Go to http://live.techpanda.org/ "):
         driver.get(url)
         time.sleep(0.5)
         
@@ -63,6 +79,7 @@ def test_day4():
         #driver.close()
         # verify the popup window closed and remain only one window
         assert len(driver.window_handles)==1
+    driver.quit()
         
 if __name__ == '__main__':
     test_day4()

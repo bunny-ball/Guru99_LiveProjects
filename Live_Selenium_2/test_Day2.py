@@ -1,3 +1,14 @@
+'''
+Verify that cost of product in list page and details page are equal.
+
+Test Steps:
+1. Goto http://live.techpanda.org/ 
+2. Click on 'MOBILE' menu.
+3. In the list of all mobile , read the cost of Sony Xperia mobile). Note this value 
+4. Click on Sony Xperia mobile.
+5. Read the Sony Xperia mobile from detail page. 
+6. Compare value in Step 3 & Step 5. --> Product Value in list and details page should be equal ($100) 
+'''
 import allure
 import pytest
 import time
@@ -31,6 +42,6 @@ def test_day2():
         
     with allure.step("Step6: compare value in step 3 and step 5"):
         assert price1 == price2
-        
+    driver.quit()
 if __name__ == '__main__':
     test_day2()

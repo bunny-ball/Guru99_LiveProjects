@@ -1,3 +1,38 @@
+'''Purchase Products
+Verify user is able to purchase product using registered email id
+
+Test Steps: 
+1.Go to http://live.techpanda.org/ 
+2.Click on my account link 
+3.Login in application using previously created credential 
+4.Click on MY WISHLIST link 
+5.In next page, Click ADD TO CART link 
+6.Click PROCEED TO CHECKOUT 2) Shipping 
+7. Enter Shipping Information Information 
+8. Click Estimate  
+9. Verify Shipping cost generated  --> Flat Rate Shipping of S5 is generated 
+10. Select Shipping Cost
+***These steps provided by Guru99 DO NOT match up with the website***
+11. Verify shipping cost is added to total  --> Shipping cost is added to total product cost
+12. Click "Proceed to Checkout'
+13. Enter Billing Information 
+14. In Shipping Method, Click Continue  
+15. In Payment Information select the 'Check/Money Order' radio button. Click Continue 
+16.Click 'PLACE ORDER' button  --> Oder is placed. Order number is generated
+
+
+Test Data:
+email = 
+pwd =  
+(Created in Day5.py)
+Shipping Information: 
+Country = United States
+State = New York
+Zip = 542896 
+Address = ABC
+City = New York
+Telephone = 12345678
+'''
 import pytest
 import allure
 from selenium import webdriver
@@ -6,7 +41,7 @@ from selenium.webdriver.support.select import Select
 import time
 from test_Day5 import Data
 
-class Ship_info():
+class Ship_info:
     def __init__(self):
         self.country = 'United States'
         self.state = 'New York'
@@ -14,8 +49,6 @@ class Ship_info():
         self.address = 'ABC'
         self.city = 'New York'
         self.tel = '12345678'
-
-
 
 def check_out(driver):
     with allure.step("Step 2: click my account link"):
@@ -100,6 +133,7 @@ def test_day6():
         driver.implicitly_wait(3)
     check_out(driver)
     place_order(driver)
+    driver.quit()
     
 
 if __name__ == '__main__':
