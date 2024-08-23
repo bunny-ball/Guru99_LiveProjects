@@ -49,6 +49,6 @@ def test_day9():
         assert init_price * 0.05 == discount_amount
         after_grand_total = float(driver.find_element(By.XPATH, "//strong//span[@class='price']").text[1:])
         assert after_grand_total == init_price - discount_amount
-        
+    driver.quit()
 if __name__ =='__main__':
     pytest.main(['test_Day9.py'])

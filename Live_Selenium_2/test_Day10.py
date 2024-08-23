@@ -43,7 +43,7 @@ def test_day10():
     time.sleep(1)
     ActionChains(driver).move_to_element(orders_menu).click(orders_menu).perform()
     time.sleep(2)
-    
+    driver.quit()
     
 if __name__ =='__main__':
     test_day10()
