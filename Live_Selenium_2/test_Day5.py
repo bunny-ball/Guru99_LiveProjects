@@ -32,7 +32,7 @@ class Data:
     def __init__(self):
         self.firstname = "Test"
         self.lastname = "Tester"
-        self.email = '12358@123123123.com'
+        self.email = '123333@123123123.com'
         self.pwd = '123123'
         self.url = 'http://live.techpanda.org/'
         self.message = 'share to you'
