@@ -29,7 +29,7 @@ def capture_screen(driver, name : str):
     
 def test_day8():
     driver = webdriver.Chrome()
-    driver.maximize_window
+    driver.maximize_window()
     driver.implicitly_wait(3)
     with allure.step("Step 1: Go to http://live.techpanda.org/"):
         driver.get(Data().url)
