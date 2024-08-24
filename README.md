@@ -32,8 +32,9 @@ Chrome Driver
 - Day 10 - Emails (the export CSV function will cause an error in website, only write first three steps.)
     -- Key Point: Using ActionChains to practice cursor hover function
 
-
 **NOTE**: The test cases/steps were provided by Guru99 - However I found some test cases where the steps were inconsistent with the actual website.
+
+----
 
 ## Selenium Live Project 2 - Additional Practice
 These test case are provided through the 'Day 11: Project Closure' email of the Ecommerce project. ([test case](https://clicks.aweber.com/y/ct/?l=K7I4nn&m=lPM79guQLUQLjy9&b=bQTsfzG3NlQJenF9yI2qIA))
