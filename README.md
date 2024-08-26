@@ -4,9 +4,13 @@ Here is my solutions for Guru99 Live Projects, using Pytest to verify results an
 **Environment**:
 
 Python 3.10.11
+
 Selenium 4.23.1
+
 Pytest: 8.3.2
+
 Allure: 2.30.0
+
 Chrome Driver
 
 ----
