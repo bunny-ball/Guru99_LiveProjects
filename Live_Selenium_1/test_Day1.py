@@ -1,5 +1,17 @@
 '''
 Verify the Login Section
+
+Test Step:
+1. Go to http://www.demo.guru99.com/V4/
+2. Enter valid UserId
+3. Enter valid Password
+4. Click Login
+
+Test Data:
+UserId
+Password
+
+Expected Result: Login successful
 '''
 import allure
 import pytest

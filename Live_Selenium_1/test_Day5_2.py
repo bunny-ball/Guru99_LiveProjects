@@ -1,13 +1,13 @@
 
 '''
-Excute same test case steps but with different test data stored in MS Excel file.
+Excute same test case steps but with different test data, instead of Excel, using fixture data parametrize
 
 Test Step:
 1. Go to http://www.demo.guru99.com/V4/
 2. Enter valid UserId
 3. Enter valid Password
 4. Click Login
-5. Verify the oupput
+5. Verify ManagerID shown in shown
 
 Test Data:
 1. Enter in valid user and valid pwd
@@ -17,33 +17,47 @@ Test Data:
 '''
 import pytest
 import allure
-from Day3_info import Info
+from Day5_info import Info
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time   
-import pandas as pd
+import time 
 
+test_data = [
+    {
+        "user": "valid",
+        "pwd": "valid"
+    },
+    {
+        "user": "invalid",
+        "pwd": "valid"
+    },
+    {
+        "user": "valid",
+        "pwd": "invalid"
+    },
+    {
+        "user": "invalid", 
+        "pwd": "invalid"
+    }
+]
 
-# check if there's an alert exists
-def is_alert_present(driver):
-    try:
-        driver.switch_to.alert
-        return True
-    except:
-        return False
-    
-def login_verify(user,pwd):
+@pytest.fixture(params=test_data)
+def data(request):
+    return request.param
+
+def test_day3(data):
+
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.implicitly_wait(3)
     correct_u = "valid"
     correct_p = "valid"
-    if user == correct_u:
+    if data.get('user') == correct_u:
         v_u = "valid"
     else:
         v_u = "invalid"
     step2 = "Step 2: enter " + v_u + " UserID"
-    if pwd == correct_p:
+    if data.get('pwd') == correct_p:
         v_p = 'valid'
     else:
         v_p = "invalid"
@@ -53,12 +67,12 @@ def login_verify(user,pwd):
     with allure.step(step2):
         driver.find_element(By.XPATH, "//input[@name='uid']").clear()
         time.sleep(0.5)
-        driver.find_element(By.XPATH, "//input[@name='uid']").send_keys(user)
+        driver.find_element(By.XPATH, "//input[@name='uid']").send_keys(data.get('user'))
         time.sleep(0.5)
         # print("User: ", user)
     with allure.step(step3):
         driver.find_element(By.XPATH, "//input[@name='password']").clear()
-        driver.find_element(By.XPATH, "//input[@name='password']").send_keys(pwd)
+        driver.find_element(By.XPATH, "//input[@name='password']").send_keys(data.get('pwd'))
         time.sleep(0.5)
         # print("Password : ", pwd)
     with allure.step("Step 4: click Login"):
@@ -67,18 +81,10 @@ def login_verify(user,pwd):
         time.sleep(0.5)
     
     with allure.step("Step 5: Verify the output"):
-    # method 1: using alert exits to check login successful or failed
-        # if is_alert_present(driver):
-        #     # print("Invalid User or Password")
-        #     assert driver.switch_to.alert.text == 'User or Password is not valid'
-        # else:
-        #     # print("Valid User and Password")
-        #     show_msg =  driver.find_element(By.XPATH, '//tr[@class=\'heading3\']').text
-        #     assert  user  in show_msg
-    # method 2: using correct password and username to check successful or failed.
+
         if v_p == 'valid' and v_u == 'valid':  # login should be successful,
             show_msg =  driver.find_element(By.XPATH, '//tr[@class=\'heading3\']').text
-            assert user  in show_msg
+            assert data.get('user')  in show_msg
         else:
             alert = driver.switch_to.alert
             assert alert.text == 'User or Password is not valid'
@@ -87,15 +93,5 @@ def login_verify(user,pwd):
             
     driver.quit()
 
-
-def test_day3():
-    excelData = pd.read_excel(r"C:\Users\Nemo\Documents\Automation_Testing_Learning\Guru99_LiveProjects\Live_Selenium_1\Day3.xlsx")
-
-    for row in range(0,4):   
-        user = excelData.iloc[row][0]
-        pwd = excelData.iloc[row][1]
-        login_verify(user,pwd)
-        
-
 if __name__ == '__main__':
-    pytest.main(['test_Day3.py'])
+    pytest.main(['test_Day5_2.py'])

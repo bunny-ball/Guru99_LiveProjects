@@ -1,13 +1,14 @@
 
 '''
-Excute same test case steps but with different test data stored in MS Excel file.
+Excute same test case steps but with different test data, instead of Excel, using pytest.mark.parametrize
 
 Test Step:
 1. Go to http://www.demo.guru99.com/V4/
 2. Enter valid UserId
 3. Enter valid Password
 4. Click Login
-5. Verify the oupput
+5. Verify ManagerID shown in shown
+6. take screenshot of the o/p
 
 Test Data:
 1. Enter in valid user and valid pwd
@@ -17,22 +18,17 @@ Test Data:
 '''
 import pytest
 import allure
-from Day3_info import Info
+from Day5_info import Info
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time   
-import pandas as pd
+import time 
 
+   
+@pytest.mark.parametrize("user,pwd", [("valid","valid"),("invalid","valid"),
+                                      ("valid","invalid"),("mngr58081","invalid")])
 
-# check if there's an alert exists
-def is_alert_present(driver):
-    try:
-        driver.switch_to.alert
-        return True
-    except:
-        return False
-    
-def login_verify(user,pwd):
+def test_day3(user,pwd):
+
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.implicitly_wait(3)
@@ -67,16 +63,8 @@ def login_verify(user,pwd):
         time.sleep(0.5)
     
     with allure.step("Step 5: Verify the output"):
-    # method 1: using alert exits to check login successful or failed
-        # if is_alert_present(driver):
-        #     # print("Invalid User or Password")
-        #     assert driver.switch_to.alert.text == 'User or Password is not valid'
-        # else:
-        #     # print("Valid User and Password")
-        #     show_msg =  driver.find_element(By.XPATH, '//tr[@class=\'heading3\']').text
-        #     assert  user  in show_msg
-    # method 2: using correct password and username to check successful or failed.
-        if v_p == 'valid' and v_u == 'valid':  # login should be successful,
+        if v_p == 'valid' and v_u == 'valid':  # login should be successful
+            allure.attach(driver.get_screenshot_as_png(),name="Login Successful",attachment_type=allure.attachment_type.PNG)
             show_msg =  driver.find_element(By.XPATH, '//tr[@class=\'heading3\']').text
             assert user  in show_msg
         else:
@@ -87,15 +75,5 @@ def login_verify(user,pwd):
             
     driver.quit()
 
-
-def test_day3():
-    excelData = pd.read_excel(r"C:\Users\Nemo\Documents\Automation_Testing_Learning\Guru99_LiveProjects\Live_Selenium_1\Day3.xlsx")
-
-    for row in range(0,4):   
-        user = excelData.iloc[row][0]
-        pwd = excelData.iloc[row][1]
-        login_verify(user,pwd)
-        
-
 if __name__ == '__main__':
-    pytest.main(['test_Day3.py'])
+    pytest.main(['test_Day6.py'])

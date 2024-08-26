@@ -15,6 +15,19 @@ Chrome Driver
 
 ----
 
+## Selenium_LiveProject1_Bank
+
+- Day1 - Verify the login section
+- Day2 - Enhancing Day1 script - Verifying Output
+- Day3 - Enhancing Script - Parametrize data from Excel sheet
+    - Key Point: Read data from excel file; Alert dialog handling
+- Day4 - N/A
+- Day5 - Enhancingscript - Verifying ManagerID, using parametrize data annotation
+    - Key Point: Using two methods to parametrize data
+- Day6 - Enhancing scripts - Adding Screenshot function
+
+----
+
 ## Selenium Live Project 2 - Ecommerce
 - Day 1 - Verify Mobile List can be sorted by Name
     - Key Point: "Select" function practice
