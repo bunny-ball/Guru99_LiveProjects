@@ -30,7 +30,7 @@ def test_day1():
         allure.attach(driver.get_screenshot_as_png(),name='login page',attachment_type=allure.attachment_type.PNG)
         show_msg = driver.find_element(By.XPATH, '//tr[@class=\'heading3\']').text
         assert userId  in show_msg
-    #driver.quit()
+    driver.quit()
 
 if __name__ == '__main__':
     test_day1()

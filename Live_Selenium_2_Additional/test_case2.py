@@ -1,9 +1,7 @@
 '''
 Verify the product review mechanism
 
-Test Steps:
- 
- 	
+Test Steps:	
 1. Go to http://live.techpanda.org/.
 2. Go To Link - http://live.techpanda.org/index.php/review/product/list/id/1/
 3. Fill the required review and submit it
@@ -22,7 +20,6 @@ id = "user01"
 pass = "guru99com"
 
 '''
-
 
 
 import pytest

@@ -22,7 +22,7 @@ def login(driver,url,userId,pwd):
         allure.attach(driver.get_screenshot_as_png(),name='login page',attachment_type=allure.attachment_type.PNG)
         show_msg =  driver.find_element(By.XPATH, '//tr[@class=\'heading3\']').text
         assert  Info().userId  in show_msg
-    #driver.quit()
+    driver.quit()
 
 def test_day2():
     driver = Info().driver

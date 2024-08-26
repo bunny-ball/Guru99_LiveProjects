@@ -33,6 +33,9 @@ import os
 import tempfile
 import glob
 import fnmatch
+def capture_screen(driver, name : str):
+    allure.attach(driver.get_screenshot_as_png(),name=name,attachment_type=allure.attachment_type.PNG)
+    
 
 def test_case1():
     
@@ -47,10 +50,7 @@ def test_case1():
     driver.implicitly_wait(30)
 
     with allure.step("Step 1: Go to http://live.techpanda.org/index.php/backendlogin"):
-        driver.get("http://live.techpanda.org/index.php/backendlogin")
-    
-    
-    
+        driver.get("http://live.techpanda.org/index.php/backendlogin")  
     
     with allure.step("Step 2: Login the credentials provided"):
         driver.find_element(By.XPATH, "//input[@id='username']").send_keys('user01')
@@ -85,6 +85,7 @@ def test_case1():
         time.sleep(1)
         
     with allure.step("Step 7:Verify the error message"):
+        capture_screen(driver, "step 7")
         expect_err_msg = "There are no printable documents related to selected orders."
         actual_err_msg = driver.find_element(By.XPATH, "//li[@class='error-msg']").text
         assert expect_err_msg == actual_err_msg
