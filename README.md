@@ -1,21 +1,17 @@
 # Guru99 Live Projects
 Here is my solutions for Guru99 Live Projects, using Pytest to verify results and Allure to generate test report.
 
-Environment:
+**Environment**:
 
 Python 3.10.11
-
 Selenium 4.23.1
-
 Pytest: 8.3.2
-
 Allure: 2.30.0
-
 Chrome Driver
 
 ----
 
-## Selenium_LiveProject1_Bank
+###  Selenium_LiveProject1_Bank
 
 - Day1 - Verify the login section
 - Day2 - Enhancing Day1 script - Verifying Output
@@ -28,7 +24,7 @@ Chrome Driver
 
 ----
 
-## Selenium Live Project 2 - Ecommerce
+### Selenium Live Project 2 - Ecommerce
 - Day 1 - Verify Mobile List can be sorted by Name
     - Key Point: "Select" function practice
 - Day 2 - Verify prices are same in different pages
@@ -49,7 +45,7 @@ Chrome Driver
 
 ----
 
-## Selenium Live Project 2 - Additional Practice
+### Selenium Live Project 2 - Additional Practice
 These test case are provided through the 'Day 11: Project Closure' email of the Ecommerce project. ([test case](https://clicks.aweber.com/y/ct/?l=K7I4nn&m=lPM79guQLUQLjy9&b=bQTsfzG3NlQJenF9yI2qIA))
 
 - Test Case 1 - Verify invoice can be printed
