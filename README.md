@@ -49,8 +49,19 @@ Chrome Driver
 
 ----
 
+### Selenium Live Project 1 - Additional Practice
+These [test case](https://clicks.aweber.com/y/ct/?l=K7I4nn&m=lPM79guQLUQLjy9&b=bQTsfzG3NlQJenF9yI2qIA) are provided through the 'Day 7: Project Closure' email of the Bank project.
+
+Only practice the first three test scenarios, as the remaining test cases have a similar verify function.
+
+Key Point:
+- Transfer values from test case 1 to test case 2
+- Use `@fixture` to run different test cases in one webdriver session
+
+----
+
 ### Selenium Live Project 2 - Additional Practice
-These test case are provided through the 'Day 11: Project Closure' email of the Ecommerce project. ([test case](https://clicks.aweber.com/y/ct/?l=K7I4nn&m=lPM79guQLUQLjy9&b=bQTsfzG3NlQJenF9yI2qIA))
+These [test case](https://clicks.aweber.com/y/ct/?l=6tm0&m=mjhACQKp7WFEjy9&b=x4nmnAI.0mGyaQdbD6sfGg) are provided through the 'Day 11: Project Closure' email of the Ecommerce project. 
 
 - Test Case 1 - Verify invoice can be printed
     - Key Point: download file check/verify
